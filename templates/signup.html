@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="signup-section" id="signup">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <div class="container">
+        <div class="row">
+            <!-- Default form register -->
+            <form class="text-center border border-light p-5" method="POST">
+
+                <p class="h4 mb-4">Sign up</p>
+
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <input type="text" id="defaultRegisterFormFirstName" class="form-control"
+                            placeholder="Full Name" name="name">
+                    </div>
+                </div>
+                <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"
+                    name="email">
+                <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
+                    name="pass" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                    At least 8 characters and 1 digit
+                </small>
+
+                <button class="btn btn-info my-4 btn-block" type="submit">Sign Up</button>
+
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
