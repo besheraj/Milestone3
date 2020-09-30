@@ -69,9 +69,9 @@ def profile(email):
 
 @app.route('/logout')
 def logout():
-    session.pop('email');
+    session.pop('email')
     session.pop('logged_in')
-    return render_template('login.html');
+    return render_template('login.html')
 
 
 
