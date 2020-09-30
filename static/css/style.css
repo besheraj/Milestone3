@@ -1,75 +1,155 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
+.center {
+  text-align: center;
+}
+
+.navbar {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.7) 75%,
+    #000000 100%
+  ),
+  url("../assets/img/bg-masthead.jpg");
+}
 
 .masthead {
-    position: relative;
-    width: 100%;
-    height: auto;
-    min-height: 35rem;
-    padding: 15rem 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../assets/img/bg-masthead.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
-  }
-  .masthead h1 {
-    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    letter-spacing: 0.8rem;
-    padding-bottom: 25px;
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-            background-clip: text;
-  }
-  .masthead h2 {
-    max-width: 20rem;
-    font-size: 1rem;
-  }
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.7) 75%,
+      #000000 100%
+    ),
+    url("../assets/img/bg-masthead.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+.masthead h1 {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.8rem;
+  padding-bottom: 25px;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.masthead h2 {
+  max-width: 20rem;
+  font-size: 1rem;
+}
 
-  .signup-section {
-    padding: 10rem 15rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000000 100%), url("../assets/img/bg-signup.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
-    text-align: center;
-  }
+.signup-section {
+  padding: 10rem 3rem;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.5) 75%,
+      #000000 100%
+    ),
+    url("../assets/img/bg-signup.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  text-align: center;
+}
 
-  .signup-section p {
-      color: aliceblue;
-  }
-  .flashes {
-      background-color: aliceblue;
-      text-align: center;
-      font-weight: 500;
-      font-size: 1.5rem;
-      margin: 20px;
-      list-style-type: none;
+.signup-section p {
+  color: aliceblue;
+}
+.flashes {
+  background-color: aliceblue;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 20px;
+  list-style-type: none;
+}
+.form-color {
+  color: #757575;
+}
+.forbidden-section {
+  padding: 10rem 3rem;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.5) 75%,
+      #000000 100%
+    ),
+    url("../assets/img/bg-signup.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  text-align: center;
+  height: 95vh;
+}
+.profile-section {
+  padding: 10rem 3rem;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.5) 75%,
+      #000000 100%
+    ),
+    url("../assets/img/profile.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  text-align: center;
+  height: auto;
+}
+.album {
+  color: #d4b3b3;
+  font-size: 16px;
+  border: grey 1px solid;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 50px auto;
+}
 
-  }
-  .form-color {
-    color: #757575
-  }
-  .forbidden-section {
-    padding: 10rem 15rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000000 100%), url("../assets/img/bg-signup.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
-    text-align: center;
-    height: 95vh;
-  }
-  .profile-section {
-    padding: 10rem 15rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000000 100%), url("../assets/img/profile.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
-    text-align: center;
-    height: 95vh;
-  }
+
+.thumb {
+  margin-bottom: 30px;
+}
+
+
+img.zoom {
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+
+.transition {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.welcome-message {
+  padding: 30px;
+  font-weight: 500;
+  text-decoration: underline;
+  margin-bottom: 50px;
+}

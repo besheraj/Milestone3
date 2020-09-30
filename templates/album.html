@@ -47,24 +47,31 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <form class="text-center border border-light p-5" method="POST" action="/album/insert">
-                    <div>
-                        <h2>Add a Photo:</h2>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                     </div>
-                    <input type="text" class="form-control mb-4" placeholder="Photo Name" name="alt" required>
-                    <input type="text" class="form-control mb-4" placeholder="Photo Source" name="src" required>
-                    <button class="btn btn-info btn-block my-4" type="submit">Add Photo</button>
-                </form>
-                <!-- <div class="custom-file">
+                    <div class="custom-file">
                         <input type="file" class="custom-file-input" id="inputGroupFile01"
                             aria-describedby="inputGroupFileAddon01">
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                    </div> -->
+                    </div>
+                </div>
             </div>
         </div>
-        <div> <a href="{{url_for('album',email=email)}}">My Albums</a>
-        </div>
+        <div class="album">
+            <div class="row">
+                {% for photo in photos %}
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a href="{{ photo.src }}" class="fancybox" rel="ligthbox" data-fancybox="gallery">
+                        <img src="{{ photo.src }}" class="zoom img-fluid " alt="{{ photo.alt }}">
+                    </a>
+                </div>
+                {% endfor %}
 
+
+            </div>
+        </div>
     </section>
 
 

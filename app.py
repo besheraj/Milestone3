@@ -57,23 +57,41 @@ def login():
             return redirect (url_for("login"))
     return render_template("login.html")           
 
-@app.route('/profile/<string:email>')
+@app.route('/profile/<email>')
 def profile(email):
     if session["email"].lower() == email.lower():
         existing_user = mongo.db.users.find_one(
             {"email":email.lower()})
-        return render_template("profile.html",email=email, name=existing_user["name"])
+        photos = mongo.db.photos.find({"email": email.lower()})
+        return render_template("profile.html",email=email, name=existing_user["name"], photos=photos)
     else:
         flash("You are not allowed to access someone's else profile")
         return render_template("forbidden.html")
+
+@app.route('/album/<email>')
+def album(email):
+    if session["email"].lower() == email.lower():
+        photos = mongo.db.photos.find({"email": email.lower()})
+        return render_template("album.html", photos=photos)
+
+@app.route('/album/insert', methods=['POST'])
+def album_insert():
+    photos = mongo.db.photos
+    inputs = request.form.to_dict()
+    inputs['email'] = session['email']
+    photos.insert_one(inputs)
+    return redirect(url_for('album',email=session['email']))
 
 @app.route('/logout')
 def logout():
     session.pop('email')
     session.pop('logged_in')
-    return render_template('login.html')
+    return render_template('index.html')
 
 
+# @app.errorhandler(500)
+# def page_not_found(e):
+#     return render_template('forbidden.html'), 500
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
