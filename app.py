@@ -27,9 +27,8 @@ def signup():
         users = mongo.db.users
         existing_user = users.find_one({'email' : email})
         if existing_user:
-            flash("Email already exists")
+            flash("Email already exists Please try to Login")
             return redirect(url_for("signup"))
-
         if existing_user is None:
             hashpass = generate_password_hash(request.form['pass'])
             users.insert({'name' : name, 
@@ -54,7 +53,7 @@ def login():
                 flash("Incorrect username and/or password")
                 return redirect(url_for("login"))   
         else:
-            flash("The user doesn't exist")
+            flash("This email doesn't exist in our system, kindly signup for a new account")
             return redirect (url_for("login"))
     return render_template("login.html")           
 
