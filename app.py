@@ -1,7 +1,8 @@
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, redirect, request, url_for, session, flash
-from flask_pymongo import PyMongo
+from flask import Flask, render_template, redirect, request, url_for, session, flash , Blueprint
+from flask_paginate import Pagination, get_page_parameter
+from flask_pymongo import PyMongo , pymongo
 from bson.objectid import ObjectId 
 if os.path.exists("env.py"):
       import env 
@@ -10,6 +11,8 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'photo_gallery'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+app.config['PAGE_SIZE'] = 20
+app.config['VISIBLE_PAGE_COUNT'] = 10
 
 
 mongo = PyMongo(app)
@@ -68,11 +71,18 @@ def profile(email):
         flash("You are not allowed to access someone's else profile")
         return render_template("forbidden.html")
 
+
+
 @app.route('/album/<email>')
 def album(email):
     if session["email"].lower() == email.lower():
-        photos = mongo.db.photos.find({"email": email.lower()})
-        return render_template("album.html", photos=photos)
+        page = request.args.get(get_page_parameter(), type=int, default=1) 
+        if page <= 0:
+            page = 1  
+        per_page = 4
+        photos = mongo.db.photos.find({"email": email.lower()}).skip((page-1)*per_page).limit(per_page)
+        pagination = Pagination(page=page, total=photos.count(),record_name='photos', per_page=per_page)
+        return render_template("album.html", photos=photos , pagination=pagination )
 
 @app.route('/album/insert', methods=['POST'])
 def album_insert():
