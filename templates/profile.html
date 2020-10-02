@@ -47,12 +47,13 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <form class="text-center border border-light p-5" method="POST" action="/album/insert">
+                <form class="text-center border border-light p-5" method="POST" action="/album/insert"
+                    enctype="multipart/form-data">
                     <div>
                         <h2>Add a Photo:</h2>
                     </div>
                     <input type="text" class="form-control mb-4" placeholder="Photo Name" name="alt" required>
-                    <input type="text" class="form-control mb-4" placeholder="Photo Source" name="src" required>
+                    <input type="file" name="user_file">
                     <button class="btn btn-info btn-block my-4" type="submit">Add Photo</button>
                 </form>
                 <!-- <div class="custom-file">
@@ -64,43 +65,12 @@
         </div>
         <div> <a href="{{url_for('album',email=email)}}">My Albums</a>
         </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                    </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                            aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </section>
-
 
     <footer class="footer bg-black small text-center text-white-50">
         <div class="container">Copyright © Your Website 2020</div>
     </footer>
-    <script>
-        $(document).ready(function () {
 
-            $(".zoom").hover(
-                function () {
-                    $(this).addClass("transition");
-                }, function () {
-                    $(this).removeClass("transition");
-                }
-            );
-            $(document).ready(function () {
-                $(".album a").fancybox();
-            });
-        });
-    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 </body>
 

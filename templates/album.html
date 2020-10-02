@@ -45,7 +45,7 @@
                 <h2>Welcome {{name}} </h2>
             </div>
         </div>
-        {{ pagination.skip }}
+        {{ pagination.info }}
         <div class="album">
             <div class="row">
                 {% for photo in photos %}
@@ -58,7 +58,6 @@
             </div>
         </div>
         <div>
-            {{ pagination.info }}
             {{ pagination.links }}
         </div>
     </section>
