@@ -1,32 +1,43 @@
-{% extends 'loggedin-base.html' %} 
+{% extends 'loggedin-base.html' %}
 {% block content %}
-    <section class="profile-section container-fluid">
-        <div class="row">
-            <div class="col welcome-message">
-                <h2>Welcome {{name}} </h2>
-            </div>
+<section class="profile-section container-fluid">
+    <div class="row">
+        <div class="col welcome-message">
+            <h2>Welcome {{name}} </h2>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <form class="text-center border border-light p-5" method="POST" action="/album/insert"
-                    enctype="multipart/form-data">
-                    <div class="profile-heading">
-                        <h2>Add New Photo:</h2>
-                    </div>
-                    <input type="text" class="form-control mb-4" placeholder="Photo Name" name="alt" required>
-                    <input type="file" name="user_file">
-                    <button class="btn btn-info btn-block my-4 btn-gallery" type="submit">Add Photo</button>
-                </form>
-            </div>
-            <div class="col-md-6 border border-light text-center p-5">
+    </div>
+    <div class="row">
+        <div>
+            {% with messages = get_flashed_messages() %} {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
+        </div>
+        <div class="col-md-6">
+            <form class="text-center border border-light p-5" method="POST" action="/album/insert"
+                enctype="multipart/form-data">
                 <div class="profile-heading">
-                    <h2>Profile:</h2>
+                    <h2>Add New Photo:</h2>
                 </div>
-                <a href="{{url_for('album',email=session['email'])}}" class="btn-gallery btn-info btn-block my-4">Edit My Profile</a>
-                <a href="{{url_for('album',email=session['email'])}}" class="btn-gallery btn-info btn-block my-4">My Gallery</a>
-            </div>
+                <input type="text" class="form-control mb-4" placeholder="Photo Name" name="alt" required>
+                <input type="file" name="user_file" required>
+                <button class="btn btn-info btn-block my-4 btn-gallery" type="submit">Add Photo</button>
+            </form>
         </div>
+        <div class="col-md-6 border border-light text-center p-5">
+            <div class="profile-heading">
+                <h2>Profile:</h2>
+            </div>
+            <a href="{{url_for('album',email=session['email'])}}" class="btn-gallery btn-info btn-block my-4">Edit My
+                Profile</a>
+            <a href="{{url_for('album',email=session['email'])}}" class="btn-gallery btn-info btn-block my-4">My
+                Gallery</a>
+        </div>
+    </div>
 
-    </section>
+</section>
 
-    {% endblock %}
+{% endblock %}

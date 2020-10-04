@@ -1,11 +1,12 @@
-import os
+import os, time
 import boto3, botocore
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, redirect, request, url_for, session, flash , Blueprint
+from flask import Flask, render_template, redirect, request, url_for, session, flash , g
 from flask_paginate import Pagination, get_page_parameter
 from flask_pymongo import PyMongo , pymongo
 from bson.objectid import ObjectId 
+from functools import wraps
 if os.path.exists("env.py"):
       import env 
 
@@ -22,6 +23,13 @@ s3 = boto3.client(
    aws_access_key_id=os.getenv('S3_KEY'),
    aws_secret_access_key=os.getenv('S3_SECRET')
 )
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session['email'] is None:
+            return redirect(url_for('login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/')
 @app.route('/index')
@@ -94,10 +102,11 @@ def album(email):
 
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
     try:
+        file_name = str(time.time()) + "-" + file.filename
         s3.upload_fileobj(
             file,
             bucket_name,
-            file.filename,
+            file_name,
             ExtraArgs={
                 "ACL": acl,
                 "ContentType": file.content_type
@@ -105,7 +114,7 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
     except Exception as e:
         print("Something Happened: ", e)
         return e
-    return "{0}{1}".format(S3_LOCATION, file.filename)
+    return "{0}{1}".format(S3_LOCATION, file_name)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -116,12 +125,19 @@ def album_insert():
     if request.method == 'POST':
         if "user_file" not in request.files:
             flash("No user_file key in request.files")
+            return redirect(url_for('profile', email=session['email']))   
+
         file = request.files["user_file"]
         if file.filename == "":
             flash("Please select a file")
+            return redirect(url_for('profile', email=session['email']))
+
         if file and allowed_file(file.filename):
             file.filename = secure_filename(file.filename)
-            src = upload_file_to_s3(file, S3_BUCKET)    
+            src = upload_file_to_s3(file, S3_BUCKET)
+        else:
+            flash("we only accept photos with the following extentions png, jpg, jpeg, gif")
+            return redirect(url_for('profile', email=session['email']))
         photos = mongo.db.photos
         inputs = {"email": session["email"], "src": src, "alt": request.form["alt"]}
         photos.insert_one(inputs)
@@ -135,8 +151,13 @@ def logout():
 
 @app.route('/delete_photo/<photo_id>')
 def delete_photo(photo_id):
+    photo = mongo.db.photos.find_one({'_id': ObjectId(photo_id)})
+    src = photo["src"].replace(S3_LOCATION, "")
+    s3.delete_object(Bucket=S3_BUCKET,Key=src)
     mongo.db.photos.remove({'_id': ObjectId(photo_id)})
     return redirect(url_for('album',email=session['email']))
+
+
 
 # @app.errorhandler(500)
 # def page_not_found(e):
