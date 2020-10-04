@@ -70,6 +70,9 @@
 .signup-section p {
   color: aliceblue;
 }
+.not-member {
+  padding-top: 20px;
+}
 .flashes {
   background-color: aliceblue;
   text-align: center;
@@ -219,4 +222,9 @@ img.zoom {
   padding: 10px;
   margin: 5px auto;
   text-align: center;
+}
+.delete-profile {
+color: white;
+padding: 20px;
+margin-top: 50px;
 }

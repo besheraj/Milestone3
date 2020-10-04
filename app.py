@@ -2,7 +2,7 @@ import os, time
 import boto3, botocore
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, redirect, request, url_for, session, flash , g
+from flask import Flask, render_template, redirect, request, url_for, session, flash 
 from flask_paginate import Pagination, get_page_parameter
 from flask_pymongo import PyMongo , pymongo
 from bson.objectid import ObjectId 
@@ -161,6 +161,9 @@ def delete_photo(photo_id):
     mongo.db.photos.remove({'_id': ObjectId(photo_id)})
     return redirect(url_for('album',email=session['email']))
 
+@app.route('/edit_my_profile')
+def edit_my_profile():
+    return render_template("edit_my_profile.html")
 
 
 # @app.errorhandler(500)
