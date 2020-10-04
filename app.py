@@ -26,9 +26,9 @@ s3 = boto3.client(
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session['email'] is None:
-            return redirect(url_for('login', next=request.url))
-        return f(*args, **kwargs)
+        if "email" in session and session["email"] is not None:
+            return f(*args, **kwargs)
+        return redirect(url_for('login', next=request.url))
     return decorated_function
 
 @app.route('/')
@@ -75,6 +75,7 @@ def login():
     return render_template("login.html")           
 
 @app.route('/profile/<email>')
+@login_required
 def profile(email):
     if session["email"].lower() == email.lower():
         existing_user = mongo.db.users.find_one(
@@ -86,19 +87,19 @@ def profile(email):
         flash("You are not allowed to access someone's else profile")
         return render_template("forbidden.html")
 
-
-@app.route('/album/<email>')
-def album(email):
-    if session["email"].lower() == email.lower():
-        page = request.args.get(get_page_parameter(), type=int, default=1) 
-        if page <= 0:
-            page = 1  
-        per_page = 6
-        existing_user = mongo.db.users.find_one({"email":email.lower()})
-        name=existing_user["name"]
-        photos = mongo.db.photos.find({"email": email.lower()}).skip((page-1)*per_page).limit(per_page)
-        pagination = Pagination(page=page, total=photos.count(),record_name='photos', per_page=per_page)
-        return render_template("album.html", photos=photos , pagination=pagination,name=name )
+@app.route('/album')
+@login_required
+def album():
+    email = session["email"]
+    page = request.args.get(get_page_parameter(), type=int, default=1) 
+    if page <= 0:
+        page = 1  
+    per_page = 6
+    existing_user = mongo.db.users.find_one({"email":email.lower()})
+    name=existing_user["name"]
+    photos = mongo.db.photos.find({"email": email.lower()}).skip((page-1)*per_page).limit(per_page)
+    pagination = Pagination(page=page, total=photos.count(),record_name='photos', per_page=per_page)
+    return render_template("album.html", photos=photos , pagination=pagination,name=name )
 
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
     try:
@@ -121,6 +122,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/album/insert', methods=['POST'])
+@login_required
 def album_insert():
     if request.method == 'POST':
         if "user_file" not in request.files:
@@ -144,12 +146,14 @@ def album_insert():
         return redirect(url_for('album',email=session['email']))
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('email')
     session.pop('logged_in')
     return render_template('index.html')
 
 @app.route('/delete_photo/<photo_id>')
+@login_required
 def delete_photo(photo_id):
     photo = mongo.db.photos.find_one({'_id': ObjectId(photo_id)})
     src = photo["src"].replace(S3_LOCATION, "")
