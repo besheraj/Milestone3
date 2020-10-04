@@ -10,18 +10,23 @@
             <div class="col-md-6">
                 <form class="text-center border border-light p-5" method="POST" action="/album/insert"
                     enctype="multipart/form-data">
-                    <div>
-                        <h2>Add a Photo:</h2>
+                    <div class="profile-heading">
+                        <h2>Add New Photo:</h2>
                     </div>
                     <input type="text" class="form-control mb-4" placeholder="Photo Name" name="alt" required>
                     <input type="file" name="user_file">
-                    <button class="btn btn-info btn-block my-4" type="submit">Add Photo</button>
+                    <button class="btn btn-info btn-block my-4 btn-gallery" type="submit">Add Photo</button>
                 </form>
-
+            </div>
+            <div class="col-md-6 border border-light text-center p-5">
+                <div class="profile-heading">
+                    <h2>Profile:</h2>
+                </div>
+                <a href="{{url_for('album',email=session['email'])}}" class="btn-gallery btn-info btn-block my-4">Edit My Profile</a>
+                <a href="{{url_for('album',email=session['email'])}}" class="btn-gallery btn-info btn-block my-4">My Gallery</a>
             </div>
         </div>
-        <div> <a href="{{url_for('album',email=session['email'])}}">My Albums</a>
-        </div>
+
     </section>
 
     {% endblock %}

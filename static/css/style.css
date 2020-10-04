@@ -148,9 +148,16 @@ img.zoom {
 
 .welcome-message {
   padding: 30px;
-  font-weight: 500;
   text-decoration: underline;
+
 }
+.welcome-message h2 {
+  color: #021927;
+  font-family: Nunito, 'Times New Roman', Times, serif;
+  font-weight: 900;
+
+}
+
 .pagination-page-info {
   padding: .6em;
   padding-left: 0;
@@ -181,4 +188,35 @@ img.zoom {
 }
 .pagination ul li a {
   color: #757575;
+}
+.delete-btn {
+  width: 100%;
+  background-color: rgb(1, 53, 53);
+  color: white;
+  padding: 10px;
+  margin: 5px auto;
+  text-align: center;
+}
+.creat-btn {
+  width: 100%;
+  background-color: rgb(57, 61, 61);
+  color: white;
+  padding: 10px;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.profile-heading h2 {
+  font-weight: 500;
+  color: #f5efef;
+  background-color: rgb(57, 61, 61);
+  margin-bottom: 40px;
+}
+.btn-gallery {
+  width: 100%;
+  background-color: rgb(57, 61, 61);
+  color: white;
+  padding: 10px;
+  margin: 5px auto;
+  text-align: center;
 }

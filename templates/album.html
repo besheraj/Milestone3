@@ -8,20 +8,26 @@
     </div>
     {{ pagination.info }}
 
-        <div class="album">
-            <div class="row">
+    <div class="album">
+        <div class="row">
             {% for photo in photos %}
             <div class="col-md-4 thumb">
                 <a href="{{ photo.src }}" class="fancybox" rel="ligthbox" data-fancybox="gallery">
                     <img src="{{ photo.src }}" class="zoom img-fluid " alt="{{ photo.alt }}">
                 </a>
+                <form action="{{url_for('delete_photo', photo_id=photo._id)}}">
+                    <button class="delete-btn">Delete Photo</button>
+                </form>
             </div>
             {% endfor %}
         </div>
-        </div>
-        <div class="row pagination">
-            {{ pagination.links }}
-        </div>
+    </div>
+    <div class="row pagination">
+        {{ pagination.links }}
+    </div>
+    <div>
+        <a href="{{url_for('profile',email=session['email'])}}" class="btn creat-btn">Back to adding new photos</a>
+    </div>
 </section>
 <script>
     $(document).ready(function () {

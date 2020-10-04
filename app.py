@@ -101,8 +101,7 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
             ExtraArgs={
                 "ACL": acl,
                 "ContentType": file.content_type
-            }
-        )
+            })
     except Exception as e:
         print("Something Happened: ", e)
         return e
@@ -115,15 +114,11 @@ def allowed_file(filename):
 @app.route('/album/insert', methods=['POST'])
 def album_insert():
     if request.method == 'POST':
-
         if "user_file" not in request.files:
             flash("No user_file key in request.files")
-
         file = request.files["user_file"]
-
         if file.filename == "":
             flash("Please select a file")
-
         if file and allowed_file(file.filename):
             file.filename = secure_filename(file.filename)
             src = upload_file_to_s3(file, S3_BUCKET)    
@@ -137,6 +132,11 @@ def logout():
     session.pop('email')
     session.pop('logged_in')
     return render_template('index.html')
+
+@app.route('/delete_photo/<photo_id>')
+def delete_photo(photo_id):
+    mongo.db.photos.remove({'_id': ObjectId(photo_id)})
+    return redirect(url_for('album',email=session['email']))
 
 # @app.errorhandler(500)
 # def page_not_found(e):
