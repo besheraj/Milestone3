@@ -8,14 +8,18 @@
     <meta name="author" content="" />
     <title>Welcome To Photo Gallery</title>
     <link rel="icon" type="image/png" href="{{url_for('static', filename='assets/img/favicon.ico')}}">
-    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"
+        type="text/css" media="screen" />
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <nav class="navbar navbar-expand-lg" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="{{url_for('index')}}">Photo Gallery</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -26,7 +30,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{url_for('login')}}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                                href="{{url_for('logout')}}">Logout</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Albums</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Contact</a></li>
                     </ul>
@@ -34,15 +39,14 @@
             </div>
         </nav>
     </header>
-
     {% block content %} {% endblock %}
 
-    <!-- Footer-->
+
     <footer class="footer bg-black small text-center text-white-50">
         <div class="container">Copyright © Your Website 2020</div>
     </footer>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 </body>
 
 </html>

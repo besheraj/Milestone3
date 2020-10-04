@@ -98,7 +98,7 @@
   height: 95vh;
 }
 .profile-section {
-  padding: 10rem 3rem;
+  padding: 7rem 3rem;
   background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.1) 0%,
@@ -117,15 +117,14 @@
   color: #d4b3b3;
   font-size: 16px;
   border: grey 1px solid;
-  padding-top: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin: 50px auto;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 
 .thumb {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 
@@ -151,7 +150,6 @@ img.zoom {
   padding: 30px;
   font-weight: 500;
   text-decoration: underline;
-  margin-bottom: 50px;
 }
 .pagination-page-info {
   padding: .6em;
@@ -167,4 +165,20 @@ img.zoom {
   padding-left: 2px;
   padding: .1em .25em;
   font-size: 150%;
+}
+.pagination {
+  color: black;
+  padding-left: 2px;
+  padding: .1em .25em;
+  font-size: 120%;
+  text-align: center;
+}
+.pagination ul li {
+  list-style-type: none;
+  display: inline;
+  padding: 20px;
+  color: #757575;
+}
+.pagination ul li a {
+  color: #757575;
 }

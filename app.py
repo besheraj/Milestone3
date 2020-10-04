@@ -17,13 +17,11 @@ S3_BUCKET = os.getenv("S3_BUCKET")
 S3_LOCATION = os.getenv('S3_LOCATION')
 ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg', 'gif'])
 mongo = PyMongo(app)
-
 s3 = boto3.client(
    "s3",
    aws_access_key_id=os.getenv('S3_KEY'),
    aws_secret_access_key=os.getenv('S3_SECRET')
 )
-
 
 @app.route('/')
 @app.route('/index')
@@ -73,8 +71,9 @@ def profile(email):
     if session["email"].lower() == email.lower():
         existing_user = mongo.db.users.find_one(
             {"email":email.lower()})
+        name=existing_user["name"]
         photos = mongo.db.photos.find({"email": email.lower()})
-        return render_template("profile.html",email=email, name=existing_user["name"], photos=photos)
+        return render_template("profile.html",email=email, name=name, photos=photos)
     else:
         flash("You are not allowed to access someone's else profile")
         return render_template("forbidden.html")
@@ -86,10 +85,12 @@ def album(email):
         page = request.args.get(get_page_parameter(), type=int, default=1) 
         if page <= 0:
             page = 1  
-        per_page = 4
+        per_page = 6
+        existing_user = mongo.db.users.find_one({"email":email.lower()})
+        name=existing_user["name"]
         photos = mongo.db.photos.find({"email": email.lower()}).skip((page-1)*per_page).limit(per_page)
         pagination = Pagination(page=page, total=photos.count(),record_name='photos', per_page=per_page)
-        return render_template("album.html", photos=photos , pagination=pagination )
+        return render_template("album.html", photos=photos , pagination=pagination,name=name )
 
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
     try:
@@ -116,12 +117,12 @@ def album_insert():
     if request.method == 'POST':
 
         if "user_file" not in request.files:
-            return "No user_file key in request.files"
+            flash("No user_file key in request.files")
 
         file = request.files["user_file"]
 
         if file.filename == "":
-            return "Please select a file"
+            flash("Please select a file")
 
         if file and allowed_file(file.filename):
             file.filename = secure_filename(file.filename)
@@ -136,28 +137,6 @@ def logout():
     session.pop('email')
     session.pop('logged_in')
     return render_template('index.html')
-
-
-# @app.route("/upload/photo", methods=['GET', 'POST'])
-# def upload_photo():
-#     if request.method == 'POST':
-#         # There is no file selected to upload
-#         if "user_file" not in request.files:
-#             return "No user_file key in request.files"
-
-#         file = request.files["user_file"]
-
-#         # There is no file selected to upload
-#         if file.filename == "":
-#             return "Please select a file"
-
-#         # File is selected, upload to S3 and show S3 URL
-#         if file and allowed_file(file.filename):
-#             file.filename = secure_filename(file.filename)
-#             output = upload_file_to_s3(file, S3_BUCKET)
-#             return str(output)
-#     else:
-#         return redirect(url_for('album'))
 
 # @app.errorhandler(500)
 # def page_not_found(e):

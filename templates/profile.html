@@ -1,44 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Welcome To Photo Gallery</title>
-    <link rel="icon" type="image/png" href="{{url_for('static', filename='assets/img/favicon.ico')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"
-        type="text/css" media="screen" />
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="{{url_for('index')}}">Photo Gallery</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger"
-                                href="{{url_for('logout')}}">Logout</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Albums</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+{% extends 'loggedin-base.html' %} 
+{% block content %}
     <section class="profile-section container-fluid">
         <div class="row">
             <div class="col welcome-message">
@@ -56,22 +17,11 @@
                     <input type="file" name="user_file">
                     <button class="btn btn-info btn-block my-4" type="submit">Add Photo</button>
                 </form>
-                <!-- <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                            aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                    </div> -->
+
             </div>
         </div>
-        <div> <a href="{{url_for('album',email=email)}}">My Albums</a>
+        <div> <a href="{{url_for('album',email=session['email'])}}">My Albums</a>
         </div>
     </section>
 
-    <footer class="footer bg-black small text-center text-white-50">
-        <div class="container">Copyright © Your Website 2020</div>
-    </footer>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    {% endblock %}
