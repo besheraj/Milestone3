@@ -4,11 +4,18 @@
     <div class="row">
         <div class="col">
             <h2>Update your Profile</h2>
-            <form action="" method="POST">
-                <input type="text" id="name" class="form-control mb-4" placeholder=" Update Your Name" name="name"
-                    required>
+            {% with messages = get_flashed_messages() %} {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
+            <form action="/update_profile" method="POST">
                 <input type="email" id="defaultLoginFormEmail" class="form-control mb-4"
-                    placeholder="Update Your E-mail" name="email" required>
+                placeholder="Update Your E-mail" name="email" value="{{email}}" readonly>
+                <input type="text" id="name" class="form-control mb-4" placeholder=" Update Your Name" name="name" value="{{name}}"
+                    required>
                 <input type="password" id="password" class="form-control mb-4" placeholder="Update Your Password"
                     name="pass" pattern=".{8,}" required>
                 <input type="password" id="confirm_password" class="form-control mb-4"
@@ -19,12 +26,26 @@
                 <h3>Delete Your Profile:</h3>
                 <p>by clicking on "Delete Your Profile" below you will lose your account permenantly, your photos and
                     data will be deleted within the next 5 workign days </p>
-                <form action="">
-                    <button class="delete-btn">Delete Your Profile</button>
+                <form action="/delete_profile">
+                    <button type="submit" class="delete-btn">Delete Your Profile</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<script>
+    var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
 
 {% endblock %}

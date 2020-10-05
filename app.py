@@ -53,7 +53,7 @@ def signup():
             'email' : email})
             session['email'] = email
             session['logged_in'] = True
-            return redirect(url_for('profile', email=email))        
+            return redirect(url_for('profile', email=email))      
     return render_template("signup.html")
 
 @app.route('/login',methods=['POST', 'GET'])
@@ -163,8 +163,34 @@ def delete_photo(photo_id):
 
 @app.route('/edit_my_profile')
 def edit_my_profile():
-    return render_template("edit_my_profile.html")
+    email = session["email"]
+    existing_user = mongo.db.users.find_one({"email":email.lower()})
+    name = existing_user['name']
+    return render_template("edit_my_profile.html",email = email, name=name)
 
+@app.route('/update_profile', methods=["POST"])
+@login_required
+def update_profile():
+    email = session["email"]
+    users = mongo.db.users
+    hashpass = generate_password_hash(request.form['pass'])
+    users.update({'email' : email} ,{
+                  'email' : email,  
+                 'name' : request.form['name'], 
+                 'password' : hashpass})
+    flash("Your Profile Has Been Updated Successfully")
+    return redirect(url_for("profile",email=email))
+
+@app.route('/delete_profile')
+@login_required
+def delete_profile():
+    email = session['email']
+    photos = mongo.db.photos.find({"email":email.lower()})
+    for k in photos:
+        delete_photo(k['_id'])
+    mongo.db.users.remove({'email': email})
+    flash("Your Account has been deleted!")
+    return redirect(url_for("index"))
 
 # @app.errorhandler(500)
 # def page_not_found(e):

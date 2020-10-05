@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div>
+        <div class="col">
             {% with messages = get_flashed_messages() %} {% if messages %}
             <ul class="flashes">
                 {% for message in messages %}
@@ -16,6 +16,8 @@
             </ul>
             {% endif %} {% endwith %}
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <form class="text-center border border-light p-5" method="POST" action="/album/insert"
                 enctype="multipart/form-data">
@@ -37,7 +39,6 @@
                 Gallery</a>
         </div>
     </div>
-
 </section>
 
 {% endblock %}
