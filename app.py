@@ -9,7 +9,9 @@ from bson.objectid import ObjectId
 from functools import wraps
 if os.path.exists("env.py"):
       import env 
+# importing all required libararies above
 
+# main variables 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'photo_gallery'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
@@ -23,6 +25,8 @@ s3 = boto3.client(
    aws_access_key_id=os.getenv('S3_KEY'),
    aws_secret_access_key=os.getenv('S3_SECRET')
 )
+
+# secuirty function to make sure user logged in 
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -31,11 +35,14 @@ def login_required(f):
         return redirect(url_for('login', next=request.url))
     return decorated_function
 
+# index route
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template("index.html")
 
+# sign up routing and will check if email registered before 
+# and if not will register the new user after encrypting the password
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
@@ -56,6 +63,8 @@ def signup():
             return redirect(url_for('profile', email=email))      
     return render_template("signup.html")
 
+# login will check if the user is registered then log to the profile 
+# if not then will ask to sign up
 @app.route('/login',methods=['POST', 'GET'])
 def login():
     if request.method=="POST":
@@ -74,6 +83,8 @@ def login():
             return redirect (url_for("login"))
     return render_template("login.html")           
 
+# profile page will show the name as signup registered in the page and make 
+# sure your logged in before entering
 @app.route('/profile/<email>')
 @login_required
 def profile(email):
@@ -87,6 +98,7 @@ def profile(email):
         flash("You are not allowed to access someone's else profile")
         return render_template("forbidden.html")
 
+# album will creat new album page to display 6 photos a page
 @app.route('/album')
 @login_required
 def album():
@@ -99,8 +111,9 @@ def album():
     name=existing_user["name"]
     photos = mongo.db.photos.find({"email": email.lower()}).skip((page-1)*per_page).limit(per_page)
     pagination = Pagination(page=page, total=photos.count(),record_name='photos', per_page=per_page)
-    return render_template("album.html", photos=photos , pagination=pagination,name=name )
+    return render_template("album.html", photos=photos , pagination=pagination,name=name,email=email )
 
+# upload function to AWS bucket and will return a source link for the uploaded photo
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
     try:
         file_name = str(time.time()) + "-" + file.filename
@@ -117,10 +130,12 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         return e
     return "{0}{1}".format(S3_LOCATION, file_name)
 
+# making sure that only photos can be uploaded
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# upload the photo by getting the link from S3 bucket first then upload to database
 @app.route('/album/insert', methods=['POST'])
 @login_required
 def album_insert():
@@ -145,6 +160,7 @@ def album_insert():
         photos.insert_one(inputs)
         return redirect(url_for('album',email=session['email']))
 
+# logout function 
 @app.route('/logout')
 @login_required
 def logout():
@@ -152,6 +168,7 @@ def logout():
     session.pop('logged_in')
     return render_template('index.html')
 
+# delete a photo from database and S3 Bucket 
 @app.route('/delete_photo/<photo_id>')
 @login_required
 def delete_photo(photo_id):
@@ -161,6 +178,7 @@ def delete_photo(photo_id):
     mongo.db.photos.remove({'_id': ObjectId(photo_id)})
     return redirect(url_for('album',email=session['email']))
 
+# edit my profile will show current email and name 
 @app.route('/edit_my_profile')
 def edit_my_profile():
     email = session["email"]
@@ -168,6 +186,7 @@ def edit_my_profile():
     name = existing_user['name']
     return render_template("edit_my_profile.html",email = email, name=name)
 
+# update the profile in the database
 @app.route('/update_profile', methods=["POST"])
 @login_required
 def update_profile():
@@ -181,6 +200,8 @@ def update_profile():
     flash("Your Profile Has Been Updated Successfully")
     return redirect(url_for("profile",email=email))
 
+# delete the whole profile with all the photos uploaded to 
+# it from both database and s3 bucket
 @app.route('/delete_profile')
 @login_required
 def delete_profile():
@@ -190,7 +211,8 @@ def delete_profile():
         delete_photo(k['_id'])
     mongo.db.users.remove({'email': email})
     flash("Your Account has been deleted!")
-    return redirect(url_for("index"))
+    return logout()
+
 
 # @app.errorhandler(500)
 # def page_not_found(e):

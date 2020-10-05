@@ -1,5 +1,6 @@
 {% extends 'loggedin-base.html' %}
 {% block content %}
+<!-- edit my profile form section  -->
 <section class="profile-section container-fluid">
     <div class="row">
         <div class="col">
@@ -20,12 +21,12 @@
                     name="pass" pattern=".{8,}" required>
                 <input type="password" id="confirm_password" class="form-control mb-4"
                     placeholder="Confirm Your Updated Password" pattern=".{8,}" required>
-                <button class="btn btn-info btn-block my-4" type="submit">Update Your Profile</button>
+                <button class="btn btn-info btn-block my-4 btn-index" type="submit">Update Your Profile</button>
             </form>
             <div class="delete-profile">
                 <h3>Delete Your Profile:</h3>
-                <p>by clicking on "Delete Your Profile" below you will lose your account permenantly, your photos and
-                    data will be deleted within the next 5 workign days </p>
+                <p>Warning !! by clicking on "Delete Your Profile" below you will lose your account permenantly, your photos and
+                    data will be deleted immediately </p>
                 <form action="/delete_profile">
                     <button type="submit" class="delete-btn">Delete Your Profile</button>
                 </form>
@@ -33,6 +34,7 @@
         </div>
     </div>
 </section>
+<!-- checking password if it matches   -->
 <script>
     var password = document.getElementById("password")
   , confirm_password = document.getElementById("confirm_password");

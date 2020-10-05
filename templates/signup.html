@@ -12,7 +12,7 @@
             {% endif %} {% endwith %}
             <div class="col">
                 <form class="text-center border border-light p-5" method="POST">
-                    <p class="h4 mb-4">Sign Up</p>
+                    <h2 class="h4 mb-4">Sign Up</h2>
                     <input type="text" id="name" class="form-control mb-4" placeholder="Your Name"
                     name="name" required>
                     <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail"
@@ -21,12 +21,14 @@
                         placeholder="Password" name="pass" pattern=".{8,}" required>
                     <input type="password" id="confirm_password" class="form-control mb-4"
                         placeholder="Confirm Your Password" pattern=".{8,}" required>
-                    <button class="btn btn-info btn-block my-4" type="submit">Sign Up</button>
+                    <button class="btn btn-info btn-block my-4 btn-index" type="submit">Sign Up</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+<!-- checking password if it matches   -->
 <script>
     var password = document.getElementById("password")
   , confirm_password = document.getElementById("confirm_password");

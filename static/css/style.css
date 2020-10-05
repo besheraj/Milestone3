@@ -1,26 +1,47 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i');
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i");
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
 
+/* general styling */
 .center {
   text-align: center;
 }
 
+h2 {
+  font-weight: 700 !important;
+  font-size: 2rem !important;
+  color: #f8efef;
+  background-color: rgb(39, 39, 44);
+}
+/* nav bar styling  */
 .navbar {
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.7) 75%,
-    #000000 100%
-  ),
-  url("../assets/img/bg-masthead.jpg");
+      to bottom,
+      rgba(10, 9, 9, 0.3) 0%,
+      rgba(2, 1, 1, 0.7) 75%,
+      #000000 100%
+    ),
+    url("../assets/img/bg-masthead.jpg");
 }
+.navbar-brand {
+  color: #f5efef !important;
+  font-weight: 700 !important;
+  font-size: 2rem;
+}
+.navbar-nav a,
+.navbar-toggler {
+  color: #f5efef !important;
+  font-weight: 500 !important;
+  font-size: 1rem;
+  border-color: #f5efef;
+}
+/* index page styling */
 
 .masthead {
   position: relative;
   width: 100%;
-  height: auto;
-  min-height: 35rem;
-  padding: 15rem 0;
+  height: 86vh;
+  min-height: 30rem;
+  padding: 10rem 0;
   background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.3) 0%,
@@ -32,6 +53,7 @@
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+  color: #f5efef !important;
 }
 .masthead h1 {
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -45,11 +67,24 @@
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
+  color: #f5efef;
+  font-weight: 700;
+  font-size: 3rem;
 }
-.masthead h2 {
+.masthead h3 {
   max-width: 20rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: #f5efef;
+  font-weight: 500;
 }
+
+.btn-index {
+  color: #f5efef;
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: rgb(57, 61, 61);
+}
+/* sign up page styling  */
 
 .signup-section {
   padding: 10rem 3rem;
@@ -73,17 +108,21 @@
 .not-member {
   padding-top: 20px;
 }
+
+.form-color {
+  color: #757575;
+}
+/* flashes styling  */
 .flashes {
   background-color: aliceblue;
+  color: #2c2b2b;
   text-align: center;
   font-weight: 500;
   font-size: 1.5rem;
   margin: 20px;
   list-style-type: none;
 }
-.form-color {
-  color: #757575;
-}
+/* forbidden page styling */
 .forbidden-section {
   padding: 10rem 3rem;
   background: linear-gradient(
@@ -100,6 +139,7 @@
   text-align: center;
   height: 95vh;
 }
+/* profile page styling */
 .profile-section {
   padding: 7rem 3rem;
   background: linear-gradient(
@@ -116,6 +156,37 @@
   text-align: center;
   height: auto;
 }
+
+.creat-btn {
+  width: 100%;
+  background-color: rgb(57, 61, 61);
+  color: white;
+  padding: 10px;
+  margin: 50px auto;
+  text-align: center;
+  height: 30px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.profile-heading h2 {
+  font-weight: 500;
+  color: #f5efef;
+  background-color: rgb(39, 39, 44);
+  margin-bottom: 40px;
+}
+
+.btn-gallery {
+  width: 100%;
+  background-color: rgb(57, 61, 61);
+  color: white;
+  padding: 10px;
+  margin: 5px auto;
+  text-align: center;
+}
+
+/* album styling  */
+
 .album {
   color: #d4b3b3;
   font-size: 16px;
@@ -123,13 +194,12 @@
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  min-height: 40vh;
 }
-
 
 .thumb {
   margin-bottom: 20px;
 }
-
 
 img.zoom {
   width: 100%;
@@ -151,35 +221,34 @@ img.zoom {
 
 .welcome-message {
   padding: 30px;
-  text-decoration: underline;
-
 }
 .welcome-message h2 {
   color: #021927;
-  font-family: Nunito, 'Times New Roman', Times, serif;
+  font-family: Nunito, "Times New Roman", Times, serif;
   font-weight: 900;
+  color: #f5efef;
 
 }
 
 .pagination-page-info {
-  padding: .6em;
+  padding: 0.6em;
   padding-left: 0;
   width: 40em;
-  margin: .5em;
+  margin: 0.5em;
   margin-left: 0;
   font-size: 12px;
 }
 .pagination-page-info b {
-  color: black;
-  background: #6aa6ed;
+  color: rgb(240, 233, 233);
+  background-color: rgb(39, 39, 44);
   padding-left: 2px;
-  padding: .1em .25em;
+  padding: 0.1em 0.25em;
   font-size: 150%;
 }
 .pagination {
   color: black;
   padding-left: 2px;
-  padding: .1em .25em;
+  padding: 0.1em 0.25em;
   font-size: 120%;
   text-align: center;
 }
@@ -194,37 +263,19 @@ img.zoom {
 }
 .delete-btn {
   width: 100%;
-  background-color: rgb(1, 53, 53);
+  background-color: rgb(39, 39, 44);
   color: white;
   padding: 10px;
   margin: 5px auto;
   text-align: center;
 }
-.creat-btn {
-  width: 100%;
-  background-color: rgb(57, 61, 61);
-  color: white;
-  padding: 10px;
-  margin: 5px auto;
-  text-align: center;
+.delete-btn:hover {
+  background-color: rgb(1, 17, 17);
 }
+/* edit my page styling */
 
-.profile-heading h2 {
-  font-weight: 500;
-  color: #f5efef;
-  background-color: rgb(57, 61, 61);
-  margin-bottom: 40px;
-}
-.btn-gallery {
-  width: 100%;
-  background-color: rgb(57, 61, 61);
-  color: white;
-  padding: 10px;
-  margin: 5px auto;
-  text-align: center;
-}
 .delete-profile {
-color: white;
-padding: 20px;
-margin-top: 50px;
+  color: white;
+  padding: 20px;
+  margin-top: 100px;
 }

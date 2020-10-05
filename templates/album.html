@@ -1,5 +1,6 @@
 {% extends 'loggedin-base.html' %}
 {% block content %}
+<!-- album section  -->
 <section class="profile-section container-fluid">
     <div class="row">
         <div class="col welcome-message">
@@ -7,7 +8,6 @@
         </div>
     </div>
     {{ pagination.info }}
-
     <div class="album">
         <div class="row">
             {% for photo in photos %}
@@ -26,9 +26,10 @@
         {{ pagination.links }}
     </div>
     <div>
-        <a href="{{url_for('profile',email=session['email'])}}" class="btn creat-btn">Back to adding new photos</a>
+        <a href="{{url_for('profile',email=session['email'])}}" class="btn creat-btn">Back to Profile</a>
     </div>
 </section>
+<!-- fancy box script  -->
 <script>
     $(document).ready(function () {
         $(".zoom").hover(
@@ -40,6 +41,10 @@
         );
         $(document).ready(function () {
             $(".album a").fancybox();
+        });
+        $(".album a").each(function () {
+            $(this).attr("data-caption", $(this).find("img").attr("alt"));
+            $(this).attr("title", $(this).find("img").attr("alt"));
         });
     });
 </script>
