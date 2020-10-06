@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+html {
+  background-color: rgb(39, 37, 37);
+}
+
 h2 {
   font-weight: 700 !important;
   font-size: 2rem !important;
