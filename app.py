@@ -213,6 +213,9 @@ def delete_profile():
     flash("Your Account has been deleted!")
     return logout()
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 # @app.errorhandler(500)
 # def page_not_found(e):
