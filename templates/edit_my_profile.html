@@ -4,7 +4,6 @@
 <section class="profile-section container-fluid">
     <div class="row">
         <div class="col">
-            <h2>Update your Profile</h2>
             {% with messages = get_flashed_messages() %} {% if messages %}
             <ul class="flashes">
                 {% for message in messages %}
@@ -12,7 +11,8 @@
                 {% endfor %}
             </ul>
             {% endif %} {% endwith %}
-            <form action="/update_profile" method="POST">
+            <form action="/update_profile" method="POST" class="text-center border border-light p-5">
+                <h2 class="h4 mb-4">Update your Profile</h2>
                 <input type="email" id="defaultLoginFormEmail" class="form-control mb-4"
                 placeholder="Update Your E-mail" name="email" value="{{email}}" readonly>
                 <input type="text" id="name" class="form-control mb-4" placeholder=" Update Your Name" name="name" value="{{name}}"

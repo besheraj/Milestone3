@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i");
-@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap");
 
 /* general styling */
 .center {
@@ -56,9 +55,7 @@ h2 {
   color: #f5efef !important;
 }
 .masthead h1 {
-  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Nunito , 'Times New Roman', Times, serif;
   font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
@@ -66,7 +63,7 @@ h2 {
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
-  background-clip: text;
+          background-clip: text;
   color: #f5efef;
   font-weight: 700;
   font-size: 3rem;
@@ -206,10 +203,7 @@ img.zoom {
   height: 200px;
   border-radius: 5px;
   object-fit: cover;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
+
 }
 
 .transition {
@@ -284,21 +278,7 @@ img.zoom {
 form ::placeholder {
   color: #ced1d8;
 }
-.contact-form {
-  text-align: center;
-}
 
 .contact-form h4 {
-  padding: 15px;
   color: #f5efef;
-}
-
-.contact-form button {
-  margin-top: 25px;
-  background-color: #43400c;
-  color: #ffffff;
-}
-
-.form-control {
-  margin-bottom: 10px;
 }
