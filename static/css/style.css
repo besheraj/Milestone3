@@ -157,7 +157,6 @@ h2 {
   background-size: cover;
   text-align: center;
   height: auto;
-  height: 100vh;
 }
 
 .creat-btn {
@@ -187,7 +186,9 @@ h2 {
   margin: 5px auto;
   text-align: center;
 }
-
+.profile-box {
+  margin: 10px auto;
+}
 /* album styling  */
 
 .album {
