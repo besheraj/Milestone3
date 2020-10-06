@@ -38,7 +38,7 @@ h2 {
 .masthead {
   position: relative;
   width: 100%;
-  height: 86vh;
+  height: 100vh;
   min-height: 30rem;
   padding: 10rem 0;
   background: linear-gradient(
@@ -97,6 +97,7 @@ h2 {
   background-attachment: scroll;
   background-size: cover;
   text-align: center;
+  height: 100vh;
 }
 
 .signup-section p {
@@ -134,7 +135,7 @@ h2 {
   background-attachment: scroll;
   background-size: cover;
   text-align: center;
-  height: 95vh;
+  height: 100vh;
 }
 /* profile page styling */
 .profile-section {
@@ -152,6 +153,7 @@ h2 {
   background-size: cover;
   text-align: center;
   height: auto;
+  height: 100vh;
 }
 
 .creat-btn {
