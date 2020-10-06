@@ -282,3 +282,12 @@ form ::placeholder {
 .contact-form h4 {
   color: #f5efef;
 }
+
+/* error page styling */
+.error-title {
+  background-color: rgb(29, 27, 27);
+  color: #f8efef;
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 50px;
+}

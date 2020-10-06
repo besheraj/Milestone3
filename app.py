@@ -96,7 +96,7 @@ def profile(email):
         return render_template("profile.html",email=email, name=name, photos=photos)
     else:
         flash("You are not allowed to access someone's else profile")
-        return render_template("forbidden.html")
+        return render_template("error403.html")
 
 # album will creat new album page to display 6 photos a page
 @app.route('/album')
@@ -216,10 +216,22 @@ def delete_profile():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+    
+@app.errorhandler(500)
+def error500(e):
+    return render_template('error500.html'), 500
 
-# @app.errorhandler(500)
-# def page_not_found(e):
-#     return render_template('forbidden.html'), 500
+@app.errorhandler(404)
+def error404(e):
+    return render_template('error404.html'), 404
+
+@app.errorhandler(403)
+def error403(e):
+    return render_template('error403.html'), 403
+
+@app.errorhandler(410)
+def error410(e):
+    return render_template('error410.html'), 410
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
