@@ -1,0 +1,24 @@
+{% extends 'loggedin-base.html' %}
+{% block content %}
+<section class="container-fluid signup-section contact-form">
+    <div class="row">
+        <div class="col">
+            <form onsubmit="return sendMail()" class="text-center border border-light p-5">
+                <h2 class="mb-4 h4">Send Us a Message</h2>
+                <h4 class="mb-4 h4">Tell us about your experience!</h4>
+                <input type="text" name="name" id="name" class="form-control mb-4" placeholder="Name" required>
+                <input type="email" name="emailaddress" id="emailaddress" class="form-control mb-4" placeholder="Email"
+                    required>
+                <textarea rows="5" name="msg" id="msg" class="form-control mb-4" placeholder="Your Message"
+                    required></textarea>
+
+                <button type="submit" class="btn btn-info btn-block my-4 btn-index">
+                    <span>Send Now!</span>
+                </button>
+
+            </form>
+        </div>
+    </div>
+</section>
+<script src="{{url_for('static', filename='js/sendemail.js')}}"></script>
+{% endblock %}

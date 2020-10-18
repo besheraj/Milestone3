@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'errorbase.html' %}
 {% block content %}
 <!-- Forbidden page  -->
 <section class="forbidden-section">
-    <h1>Server Error</h1>
+    <h1>Error 500</h1>
     <div>
         {% with messages = get_flashed_messages() %} {% if messages %}
         <ul class="flashes">
@@ -12,5 +12,7 @@
         </ul>
         {% endif %} {% endwith %}
     </div>
+    <h3>The service is not available at the moment please try again later!</h3>
+    <h5>Aplogies for the incovenience</h5>
 </section>
 {% endblock %}

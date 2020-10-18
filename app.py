@@ -26,7 +26,7 @@ s3 = boto3.client(
    aws_secret_access_key=os.getenv('S3_SECRET')
 )
 
-# secuirty function to make sure user logged in 
+# security function to make sure user logged in 
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -216,6 +216,10 @@ def delete_profile():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/lg_contact')
+def lg_contact():
+    return render_template('lg_contact.html')
     
 @app.errorhandler(500)
 def error500(e):

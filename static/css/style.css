@@ -139,7 +139,9 @@ h2 {
   background-attachment: scroll;
   background-size: cover;
   text-align: center;
-  height: 100vh;
+  height: 90vh;
+  color: #f5efef;
+
 }
 /* profile page styling */
 .profile-section {
