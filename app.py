@@ -51,7 +51,7 @@ def signup():
         users = mongo.db.users
         existing_user = users.find_one({'email' : email})
         if existing_user:
-            flash("Email already exists Please try to Login")
+            flash("The Email You Entered is already exists Please try to Login")
             return redirect(url_for("signup"))
         if existing_user is None:
             hashpass = generate_password_hash(request.form['pass'])
@@ -76,10 +76,10 @@ def login():
                 session['logged_in'] = True
                 return redirect(url_for('profile', email=request.form['email'].lower()))             
             else:
-                flash("Incorrect username and/or password")
+                flash("Incorrect Password Please Try again!")
                 return redirect(url_for("login"))   
         else:
-            flash("This email doesn't exist in our system, kindly signup for a new account")
+            flash("This email your entered doesn't exist, kindly signup for a new account")
             return redirect (url_for("login"))
     return render_template("login.html")           
 
@@ -146,14 +146,14 @@ def album_insert():
 
         file = request.files["user_file"]
         if file.filename == "":
-            flash("Please select a file")
+            flash("Please Select a Photo")
             return redirect(url_for('profile', email=session['email']))
 
         if file and allowed_file(file.filename):
             file.filename = secure_filename(file.filename)
             src = upload_file_to_s3(file, S3_BUCKET)
         else:
-            flash("we only accept photos with the following extentions png, jpg, jpeg, gif")
+            flash("we only support photos with the following extensions png, jpg, jpeg, gif")
             return redirect(url_for('profile', email=session['email']))
         photos = mongo.db.photos
         inputs = {"email": session["email"], "src": src, "alt": request.form["alt"]}
@@ -197,7 +197,7 @@ def update_profile():
                   'email' : email,  
                  'name' : request.form['name'], 
                  'password' : hashpass})
-    flash("Your Profile Has Been Updated Successfully")
+    flash("Your Name and Password Has Been Updated Successfully!")
     return redirect(url_for("profile",email=email))
 
 # delete the whole profile with all the photos uploaded to 
@@ -210,7 +210,7 @@ def delete_profile():
     for k in photos:
         delete_photo(k['_id'])
     mongo.db.users.remove({'email': email})
-    flash("Your Account has been deleted!")
+    flash("Your Account has been deleted Successfully!")
     return logout()
 
 @app.route('/contact')

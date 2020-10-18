@@ -123,6 +123,7 @@ h2 {
   font-size: 1.5rem;
   margin: 20px;
   list-style-type: none;
+  text-transform: capitalize;
 }
 /* forbidden page styling */
 .forbidden-section {
