@@ -173,28 +173,27 @@ Official Github Documentation on cloning a repository: https://docs.github.com/e
 
 import os
 
-os.environ["MONGO_URI"] = "mongodb+srv://root:Password@testcluster.pscp8.mongodb.net/DBNAME?retryWrites=true&w=majority"
-os.environ["SECRET_KEY"] = "YOUR SECRET KEY"
-
-S3_BUCKET = "S3 BUCKET NAME"
-os.environ["S3_BUCKET"] = "S3 BUCKET NAME"
-os.environ["S3_KEY"] = "S3KEY"
-os.environ["S3_SECRET"] = "S3 SECRET"
-os.environ["S3_LOCATION"] = 'https://{0}.s3-ap-southeast-1.amazonaws.com/'.format(S3_BUCKET)
+os.environ["MONGO_URI"] = "mongodb+srv://root:Password@testcluster.pscp8.mongodb.net/DBNAME?retryWrites=true&w=majority"   
+os.environ["SECRET_KEY"] = "YOUR SECRET KEY"  
+S3_BUCKET = "S3 BUCKET NAME"   
+os.environ["S3_BUCKET"] = "S3 BUCKET NAME"   
+os.environ["S3_KEY"] = "S3KEY"   
+os.environ["S3_SECRET"] = "S3 SECRET"   
+os.environ["S3_LOCATION"] = "'https://{0}.s3-ap-southeast-1.amazonaws.com/'.format(S3_BUCKET)"   
 
 ### Deployment to Heroku
 1. Log in to your Heroku account and create a new App.
 2. Set the environment variables in Settings > Reveal Config Variables
-3. The following Variables must be set:
-os.environ["MONGO_URI"] = "mongodb+srv://root:Password@testcluster.pscp8.mongodb.net/DBNAME?retryWrites=true&w=majority"
-os.environ["SECRET_KEY"] = "YOUR SECRET KEY"
-S3_BUCKET = "S3 BUCKET NAME"
-os.environ["S3_BUCKET"] = "S3 BUCKET NAME"
-os.environ["S3_KEY"] = "S3KEY"
-os.environ["S3_SECRET"] = "S3 SECRET"
-os.environ["S3_LOCATION"] = 'https://{0}.s3-ap-southeast-1.amazonaws.com/'.format(S3_BUCKET)
-IP = 0.0.0.0 
-PORT = 5000
+3. The following Variables must be set:   
+os.environ["MONGO_URI"] = "mongodb+srv://root:Password@testcluster.pscp8.mongodb.net/DBNAME?retryWrites=true&w=majority"   
+os.environ["SECRET_KEY"] = "YOUR SECRET KEY"    
+S3_BUCKET = "S3 BUCKET NAME"    
+os.environ["S3_BUCKET"] = "S3 BUCKET NAME"    
+os.environ["S3_KEY"] = "S3KEY"    
+os.environ["S3_SECRET"] = "S3 SECRET"    
+os.environ["S3_LOCATION"] = 'https://{0}.s3-ap-southeast-1.amazonaws.com/'.format(S3_BUCKET)   
+IP = 0.0.0.0   
+PORT = 5000    
 4. Create requirements.txt from your project with the help of pip3 freeze --local > requirements.txt
 5. Create a Procfile echo web: python app.py > Procfile
 6. Commit changes to Git git add . followed by git commit -m ""
