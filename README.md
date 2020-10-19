@@ -1,7 +1,8 @@
 ![WebSite](doc/images/Website.png)
 live version on: [link to live version!](http://aj-photogallery.herokuapp.com/)
 # Aj Photo Gallery "Milestone 3" Project:
-Aj photo gallery a web application store user photos in the cloud using AWS and represent the photos in your own gallery, its private as every user have their own account and can upload unlimited numbers of photos and store it online.
+Aj photo gallery a web application store user photos in the cloud using AWS S3 Bucket and display the photos in your own gallery, its private as every user have their own account and can upload unlimited numbers of photos and store it online.
+as for now every user can store and display their own photos, the next version of this project will enable users to share their photos on the site public wall or share their photos thru a link.
 its very easy to use sign up to create your new account upload your photos and thats it.
 
 # User Story:
@@ -32,6 +33,7 @@ The wireframes designed by Balsamiq tool, [link to wireframes!](wireframes/wiref
 * Button to delete the whole profile with all the photos.
 
 ## Future Features:
+* Ability to share photos and post on the site public wall.
 * Ability to add new albums.
 * Ability to change or delete albums.
 * Ability to login using instagram or facebook.
